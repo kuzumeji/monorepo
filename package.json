@@ -1,0 +1,15 @@
+{
+  "name": "kuzumeji",
+  "description": "A Cutting-edge applications.",
+  "version": "1.0.0",
+  "author": "Takehiro Shimokawa",
+  "license": "AGPL",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kuzumeji/monorepo"
+  },
+  "private": true,
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  }
+}
