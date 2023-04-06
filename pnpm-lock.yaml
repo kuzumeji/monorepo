@@ -22,6 +22,43 @@ importers:
         specifier: 1.21.3
         version: 1.21.3(graphql@16.6.0)
       graphql-yoga:
+        specifier: ^3.1.1
+        version: 3.8.0(graphql@16.6.0)
+    devDependencies:
+      '@types/node':
+        specifier: 18.15.11
+        version: 18.15.11
+      prisma:
+        specifier: 4.12.0
+        version: 4.12.0
+      ts-node:
+        specifier: 10.9.1
+        version: 10.9.1(@types/node@18.15.11)(typescript@4.9.5)
+      ts-node-dev:
+        specifier: 2.0.0
+        version: 2.0.0(@types/node@18.15.11)(typescript@4.9.5)
+      typescript:
+        specifier: 4.9.5
+        version: 4.9.5
+
+  packages/kamuy-api.ORG:
+    dependencies:
+      '@pothos/core':
+        specifier: ^3.23.1
+        version: 3.29.0(graphql@16.6.0)
+      '@pothos/plugin-prisma':
+        specifier: ^3.37.0
+        version: 3.47.2(@pothos/core@3.29.0)(@prisma/client@4.12.0)(graphql@16.6.0)(typescript@4.9.5)
+      '@prisma/client':
+        specifier: 4.12.0
+        version: 4.12.0(prisma@4.12.0)
+      graphql:
+        specifier: 16.6.0
+        version: 16.6.0
+      graphql-scalars:
+        specifier: 1.21.3
+        version: 1.21.3(graphql@16.6.0)
+      graphql-yoga:
         specifier: ^3.8.0
         version: 3.8.0(graphql@16.6.0)
     devDependencies:
