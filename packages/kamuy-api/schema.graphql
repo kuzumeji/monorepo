@@ -5,6 +5,7 @@ scalar DateTime
 
 type Mutation {
   createDraft(authorEmail: String!, data: PostCreateInput!): Post!
+  createProfile(bio: String!, data: UserUniqueInput): Profile!
   deletePost(id: Int!): Post!
   incrementPostViewCount(id: Int!): Post!
   signupUser(data: UserCreateInput!): User!
@@ -31,6 +32,12 @@ input PostOrderByUpdatedAtInput {
   updatedAt: SortOrder!
 }
 
+type Profile {
+  bio: String
+  id: Int!
+  user: User!
+}
+
 type Query {
   allUsers: [User!]!
   draftsByUser(userUniqueInput: UserUniqueInput!): [Post!]
@@ -48,6 +55,7 @@ type User {
   id: Int!
   name: String
   posts: [Post!]!
+  profile: Profile!
 }
 
 input UserCreateInput {

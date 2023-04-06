@@ -1,22 +1,22 @@
-# GraphQL Server Example
+# `GraphQL` サーバー
 
-This example shows how to implement a **GraphQL server with TypeScript** with the following stack:
+以下のテクノロジースタックを使って `TypeScript` で `GraphQL` サーバーを構築しています。
 
-- [**GraphQL Yoga**](https://the-guild.dev/graphql/yoga-server): GraphQL server
-- [**Pothos**](https://pothos-graphql.dev/): Code-first GraphQL schema definition library
-- [**Prisma Client**](https://www.prisma.io/docs/concepts/components/prisma-client): Databases access (ORM)
-- [**Prisma Migrate**](https://www.prisma.io/docs/concepts/components/prisma-migrate): Database migrations
-- [**SQLite**](https://www.sqlite.org/index.html): Local, file-based SQL database
+- [GraphQL Yoga](https://the-guild.dev/graphql/yoga-server): `GraphQL` サーバー
+- [Pothos](https://pothos-graphql.dev/): コードファースト `GraphQL` スキーマ定義ライブラリ
+- [Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client): データベースアクセス(ORM)
+- [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate): データベースマイグレーション
+- [PostgreSQL](https://www.postgresql.org/): リレーショナルデータベース(RDB)
 
-## Contents
+## 目次
 
-- [Getting Started](#getting-started)
-- [Using the GraphQL API](#using-the-graphql-api)
-- [Evolving the app](#evolving-the-app)
+- [はじめに](#はじめに)
+- [GraphQL-API の使用](#GraphQL-APIの使用)
+- [アプリの進化](#アプリの進化)
 - [Switch to another database (e.g. PostgreSQL, MySQL, SQL Server)](#switch-to-another-database-eg-postgresql-mysql-sql-server)
 - [Next steps](#next-steps)
 
-## Getting started
+## はじめに
 
 ### 1. サンプルコードのダウンロードと依存関係のインストール
 
@@ -39,13 +39,14 @@ monorepo (main)$ pnpm dlx try-prisma@latest -i pnpm -n kamuy-api -p packages -t 
 
 ブラウザで [http://localhost:4000](http://localhost:4000) に移動して、[GraphQL Playground](https://github.com/prisma/graphql-playground) で `GraphQL` サーバーの API をテストします。
 
-## Using the GraphQL API
+## GraphQL-API の使用
 
-The schema that specifies the API operations of your GraphQL server is defined in [`./schema.graphql`](./schema.graphql). Below are a number of operations that you can send to the API using the GraphQL Playground.
+`GraphQL` サーバーの API 操作を指定するスキーマは、[`./schema.graphql`](./schema.graphql) で定義されます。
+以下は、`GraphQL Playground` を使用して API に送信できるいくつかの操作です。
+フィールドを追加または削除して、操作を自由に調整してください。
+`GraphQL Playground` は、オートコンプリートとクエリーバリデーションが便利です。
 
-Feel free to adjust any operation by adding or removing fields. The GraphQL Playground helps you with its auto-completion and query validation features.
-
-### Retrieve all published posts and their authors
+### 公開されたすべての投稿とその作成者を取得する
 
 ```graphql
 query {
@@ -63,17 +64,13 @@ query {
 }
 ```
 
-<details><summary><strong>See more API operations</strong></summary>
+<details><summary><strong>API 操作をもっと見る</strong></summary>
 
-### Retrieve the drafts of a user
+### ユーザーの下書きを取得する
 
 ```graphql
-{
-  draftsByUser(
-    userUniqueInput: {
-      email: "mahmoud@prisma.io"
-    }
-  ) {
+query {
+  draftsByUser(userUniqueInput: { email: "mahmoud@prisma.io" }) {
     id
     title
     content
@@ -87,7 +84,7 @@ query {
 }
 ```
 
-### Create a new user
+### 新しいユーザーを作成する
 
 ```graphql
 mutation {
@@ -97,7 +94,7 @@ mutation {
 }
 ```
 
-### Create a new draft
+### 新しい下書きを作成する
 
 ```graphql
 mutation {
@@ -116,7 +113,7 @@ mutation {
 }
 ```
 
-### Publish/unpublish an existing post
+### 既存の投稿を公開/非公開にする
 
 ```graphql
 mutation {
@@ -127,7 +124,7 @@ mutation {
 }
 ```
 
-Note that you need to replace the `__POST_ID__` placeholder with an actual `id` from a `Post` record in the database, e.g.`5`:
+`__POST_ID__` プレースホルダーをデータベースの `Post` レコードの実際の `id` に置き換える必要があることに注意してください (例: 5):
 
 ```graphql
 mutation {
@@ -138,7 +135,7 @@ mutation {
 }
 ```
 
-### Increment the view count of a post
+### 投稿の閲覧数を増やす
 
 ```graphql
 mutation {
@@ -149,7 +146,7 @@ mutation {
 }
 ```
 
-Note that you need to replace the `__POST_ID__` placeholder with an actual `id` from a `Post` record in the database, e.g.`5`:
+`__POST_ID__` プレースホルダーをデータベースの `Post` レコードの実際の `id` に置き換える必要があることに注意してください (例: 5):
 
 ```graphql
 mutation {
@@ -160,13 +157,11 @@ mutation {
 }
 ```
 
-### Search for posts that contain a specific string in their title or content
+### タイトルまたはコンテンツに特定の文字列を含む投稿を検索します
 
 ```graphql
 {
-  feed(
-    searchString: "prisma"
-  ) {
+  feed(searchString: "prisma") {
     id
     title
     content
@@ -175,15 +170,11 @@ mutation {
 }
 ```
 
-### Paginate and order the returned posts
+### 返された投稿のページ付けと順序付け
 
 ```graphql
 {
-  feed(
-    skip: 2
-    take: 2
-    orderBy: { updatedAt: desc }
-  ) {
+  feed(skip: 2, take: 2, orderBy: { updatedAt: desc }) {
     id
     updatedAt
     title
@@ -193,11 +184,11 @@ mutation {
 }
 ```
 
-### Retrieve a single post
+### 1 つの投稿を取得する
 
 ```graphql
 {
-  postById(id: __POST_ID__ ) {
+  postById(id: __POST_ID__) {
     id
     title
     content
@@ -206,11 +197,11 @@ mutation {
 }
 ```
 
-Note that you need to replace the `__POST_ID__` placeholder with an actual `id` from a `Post` record in the database, e.g.`5`:
+`__POST_ID__` プレースホルダーをデータベースの `Post` レコードの実際の `id` に置き換える必要があることに注意してください (例: 5):
 
 ```graphql
 {
-  postById(id: 5 ) {
+  postById(id: 5) {
     id
     title
     content
@@ -219,7 +210,7 @@ Note that you need to replace the `__POST_ID__` placeholder with an actual `id` 
 }
 ```
 
-### Delete a post
+### 投稿を削除する
 
 ```graphql
 mutation {
@@ -229,7 +220,7 @@ mutation {
 }
 ```
 
-Note that you need to replace the `__POST_ID__` placeholder with an actual `id` from a `Post` record in the database, e.g.`5`:
+`__POST_ID__` プレースホルダーをデータベースの `Post` レコードの実際の `id` に置き換える必要があることに注意してください (例: 5):
 
 ```graphql
 mutation {
@@ -241,18 +232,18 @@ mutation {
 
 </details>
 
-## Evolving the app
+## アプリの進化
 
-Evolving the application typically requires two steps:
+アプリケーションを進化させるには、通常、次の 2 つの手順が必要です。
 
-1. Migrate your database using Prisma Migrate
-1. Update your application code
+1. Prisma Migrate を使用してデータベースを移行する
+2. アプリケーション コードを更新する
 
-For the following example scenario, assume you want to add a "profile" feature to the app where users can create a profile and write a short bio about themselves.
+次の例のシナリオでは、ユーザーがプロファイルを作成し、自分自身についての短い略歴を書くことができる "プロファイル" 機能をアプリに追加するとします。
 
-### 1. Migrate your database using Prisma Migrate
+### 1. `Prisma Migrate` を使用してデータベースを移行する
 
-The first step is to add a new table, e.g. called `Profile`, to the database. You can do this by adding a new model to your [Prisma schema file](./prisma/schema.prisma) file and then running a migration afterwards:
+最初のステップは、新しいテーブルを追加することです。データベースへの`Profile`と呼ばれます。これを行うには、Prisma スキーマ定義(`./prisma/schema.prisma`)ファイルに新しいモデルを追加し、その後移行を実行します。
 
 ```diff
 // ./prisma/schema.prisma
@@ -285,21 +276,21 @@ model Post {
 +}
 ```
 
-Once you've updated your data model, you can execute the changes against your database with the following command:
+データモデルを更新したら、次のコマンドを使用してデータベースに対して変更を実行できます。
 
+```bash
+pnpm exec prisma migrate dev --name add-profile
 ```
-npx prisma migrate dev --name add-profile
-```
 
-This adds another migration to the `prisma/migrations` directory and creates the new `Profile` table in the database.
+これにより、`prisma/migrations` ディレクトリに別の移行が追加され、データベースに新しい `Profile` テーブルが作成されます。
 
-### 2. Update your application code
+### 2. アプリケーションコードを更新する
 
-You can now use your `PrismaClient` instance to perform operations against the new `Profile` table. Those operations can be used to implement queries and mutations in the GraphQL API.
+`PrismaClient` インスタンスを使用して、新しい `Profile` テーブルに対して操作を実行できるようになりました。これらの操作を使用して、 `GraphQL API` でクエリとミューテーションを実装できます。
 
-#### 2.1. Add the `Profile` type to your GraphQL schema
+#### 2.1. GraphQL スキーマに `Profile` タイプを追加します
 
-First, create a new `profile.ts` file add a new GraphQL type via Pothos' `prismaObject` function:
+まず、新しい `profile.ts` ファイルを作成し、`Pothos` の `prismaObject` 関数を介して新しい `GraphQL` タイプを追加します。
 
 ```diff
 // ./src/schema/profile.ts
@@ -314,7 +305,7 @@ First, create a new `profile.ts` file add a new GraphQL type via Pothos' `prisma
 +})
 ```
 
-Update the `User` object type to include the `profile field:
+`User` オブジェクトタイプを更新して、 `profile` フィールドを含めます。
 
 ```diff
 // ./src/schema/user.ts
@@ -330,7 +321,7 @@ builder.prismaObject('User', {
 })
 ```
 
-#### 2.2. Add a `createProfile` GraphQL mutation
+#### 2.2. `GraphQL` ミューテーション(`createProfile`) を追加する
 
 ```diff
 // ./src/schema/profile.ts
@@ -365,14 +356,12 @@ import { builder } from "../builder";
 +)
 ```
 
-Finally, you can test the new mutation like this:
+最後に、次のように新しいミューテーションをテストできます。
 
 ```graphql
 mutation {
   createProfile(
-    userUniqueInput: {
-      email: "mahmoud@prisma.io"
-    }
+    data: { email: "mahmoud@prisma.io" }
     bio: "I like turtles"
   ) {
     id
