@@ -1,15 +1,30 @@
-# `GraphQL` サーバー
+# GraphQL Server Example
 
-## はじめに
+This example shows how to implement a **GraphQL server with TypeScript** with the following stack:
+
+- [**GraphQL Yoga**](https://the-guild.dev/graphql/yoga-server): GraphQL server
+- [**Pothos**](https://pothos-graphql.dev/): Code-first GraphQL schema definition library
+- [**Prisma Client**](https://www.prisma.io/docs/concepts/components/prisma-client): Databases access (ORM)
+- [**Prisma Migrate**](https://www.prisma.io/docs/concepts/components/prisma-migrate): Database migrations
+- [**SQLite**](https://www.sqlite.org/index.html): Local, file-based SQL database
+
+## Contents
+
+- [Getting Started](#getting-started)
+- [Using the GraphQL API](#using-the-graphql-api)
+- [Evolving the app](#evolving-the-app)
+- [Switch to another database (e.g. PostgreSQL, MySQL, SQL Server)](#switch-to-another-database-eg-postgresql-mysql-sql-server)
+- [Next steps](#next-steps)
+
+## Getting started
 
 ### 1. サンプルコードのダウンロードと依存関係のインストール
 
 See https://github.com/prisma/try-prisma#readme
 
 ```bash
-$ pnpm dlx try-prisma@latest -i pnpm -n kamuy-api -p packages -t typescript/graphql-typegraphql-crud -v
+monorepo (main)$ pnpm dlx try-prisma@latest -i pnpm -n kamuy-api -p packages -t typescript/graphql -v
 ```
-
 
 ### 2. データベースの作成とテストデータのロード
 
@@ -18,40 +33,23 @@ $ pnpm dlx try-prisma@latest -i pnpm -n kamuy-api -p packages -t typescript/grap
 
 新しく作成されたデータベースに対して上記コマンドが実行されると、テストデータのロードスクリプト(`./prisma/seed.ts`)が実行されてデータがロードされます。
 
-
 ### 3. `GraphQL` サーバーの起動
 
 次のコマンドで `GraphQL` サーバーを起動します。(`pnpm run dev`)
 
-ブラウザで [http://localhost:4000](http://localhost:4000) に移動して、[GraphQL Playground](https://github.com/prisma/graphql-playground) で `GraphQL` サーバーのAPIをテストします。
+ブラウザで [http://localhost:4000](http://localhost:4000) に移動して、[GraphQL Playground](https://github.com/prisma/graphql-playground) で `GraphQL` サーバーの API をテストします。
 
 ## Using the GraphQL API
 
-`typegraphql-prisma` emits the generated TypeGraphQL classes to `node_modules/@generated/typegraphql-prisma` whenever `npx prisma generate` is invoked. 
-
-It also generates a number of model classes, enums as well CRUD and relation resolver based on your `schema.prisma` file. The generated CRUD resolvers match the operations of the [Prisma Client API](https://www.prisma.io/docs/reference/api-reference/prisma-client-reference):
-
-- `create`
-- `update`
-- `delete`
-- `findUnique`
-- `findFirst`
-- `findMany`
-- `updateMany`
-- `deleteMany`
-- `upsert`
-- `aggregate`
-- `groupBy`
-
-Below are example operations that you can send to the API using the GraphQL Playground. You can explore other operations in the **Docs** section of the GraphQL Playground.
+The schema that specifies the API operations of your GraphQL server is defined in [`./schema.graphql`](./schema.graphql). Below are a number of operations that you can send to the API using the GraphQL Playground.
 
 Feel free to adjust any operation by adding or removing fields. The GraphQL Playground helps you with its auto-completion and query validation features.
 
-#### Retrieve all published posts and their authors
+### Retrieve all published posts and their authors
 
 ```graphql
 query {
-  posts {
+  feed {
     id
     title
     content
@@ -65,63 +63,15 @@ query {
 }
 ```
 
-<Details><Summary><strong>See more API operations</strong></Summary>
+<details><summary><strong>See more API operations</strong></summary>
 
-#### Create a new user
-
-```graphql
-mutation {
-  createUser(data: {
-    name: "Sarah",
-    email: "sarah@prisma.io"
-    }
-  ) {
-    id
-  }
-}
-```
-
-#### Create a new draft
-
-```graphql
-mutation {
-  createPost(
-    data: {
-      title: "Join the Prisma Slack",
-      content: "https://slack.prisma.io"
-      author: {
-        connect: {
-          email: "alice@prisma.io"
-        }
-      }
-    }
-  ) {
-    id
-    published
-  }
-}
-```
-
-#### Publish an existing draft
-
-```graphql
-mutation {
-  updatePost(data: { published: { set: true } }, where: { id: __POST_ID__ }){
-    id
-    published
-  }
-}
-```
-
-> **Note**: You need to replace the `__POST_ID__`-placeholder with an actual `id` from a `Post` item. You can find one e.g. using the `filterPosts`-query.
-
-#### Search for posts with a specific title or content
+### Retrieve the drafts of a user
 
 ```graphql
 {
-  posts(
-    where: {
-      OR: { content: { contains: "graphql" }, title: { contains: "graphql" } }
+  draftsByUser(
+    userUniqueInput: {
+      email: "mahmoud@prisma.io"
     }
   ) {
     id
@@ -137,40 +87,159 @@ mutation {
 }
 ```
 
-#### Retrieve a single post
+### Create a new user
 
 ```graphql
-{
-  post(where: { id: __POST_ID__ }) {
+mutation {
+  signupUser(data: { name: "Sarah", email: "sarah@prisma.io" }) {
     id
-    title
-    content
+  }
+}
+```
+
+### Create a new draft
+
+```graphql
+mutation {
+  createDraft(
+    data: { title: "Join the Prisma Slack", content: "https://slack.prisma.io" }
+    authorEmail: "alice@prisma.io"
+  ) {
+    id
+    viewCount
     published
     author {
       id
       name
-      email
     }
   }
 }
 ```
 
-> **Note**: You need to replace the `__POST_ID__`-placeholder with an actual `id` from a `Post` item. You can find one e.g. using the `filterPosts`-query.
-
-#### Delete a post
+### Publish/unpublish an existing post
 
 ```graphql
-mutation{
-  deletePost(where:{id: __POST_ID__}){
+mutation {
+  togglePublishPost(id: __POST_ID__) {
+    id
+    published
+  }
+}
+```
+
+Note that you need to replace the `__POST_ID__` placeholder with an actual `id` from a `Post` record in the database, e.g.`5`:
+
+```graphql
+mutation {
+  togglePublishPost(id: 5) {
+    id
+    published
+  }
+}
+```
+
+### Increment the view count of a post
+
+```graphql
+mutation {
+  incrementPostViewCount(id: __POST_ID__) {
+    id
+    viewCount
+  }
+}
+```
+
+Note that you need to replace the `__POST_ID__` placeholder with an actual `id` from a `Post` record in the database, e.g.`5`:
+
+```graphql
+mutation {
+  incrementPostViewCount(id: 5) {
+    id
+    viewCount
+  }
+}
+```
+
+### Search for posts that contain a specific string in their title or content
+
+```graphql
+{
+  feed(
+    searchString: "prisma"
+  ) {
+    id
+    title
+    content
+    published
+  }
+}
+```
+
+### Paginate and order the returned posts
+
+```graphql
+{
+  feed(
+    skip: 2
+    take: 2
+    orderBy: { updatedAt: desc }
+  ) {
+    id
+    updatedAt
+    title
+    content
+    published
+  }
+}
+```
+
+### Retrieve a single post
+
+```graphql
+{
+  postById(id: __POST_ID__ ) {
+    id
+    title
+    content
+    published
+  }
+}
+```
+
+Note that you need to replace the `__POST_ID__` placeholder with an actual `id` from a `Post` record in the database, e.g.`5`:
+
+```graphql
+{
+  postById(id: 5 ) {
+    id
+    title
+    content
+    published
+  }
+}
+```
+
+### Delete a post
+
+```graphql
+mutation {
+  deletePost(id: __POST_ID__) {
     id
   }
 }
 ```
 
-> **Note**: You need to replace the `__POST_ID__`-placeholder with an actual `id` from a `Post` item. You can find one e.g. using the `filterPosts`-query.
+Note that you need to replace the `__POST_ID__` placeholder with an actual `id` from a `Post` record in the database, e.g.`5`:
 
-</Details>
+```graphql
+mutation {
+  deletePost(id: 5) {
+    id
+  }
+}
+```
 
+</details>
 
 ## Evolving the app
 
@@ -186,189 +255,151 @@ For the following example scenario, assume you want to add a "profile" feature t
 The first step is to add a new table, e.g. called `Profile`, to the database. You can do this by adding a new model to your [Prisma schema file](./prisma/schema.prisma) file and then running a migration afterwards:
 
 ```diff
-// schema.prisma
-
-model Post {
-  id        Int     @default(autoincrement()) @id
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  Int
-}
+// ./prisma/schema.prisma
 
 model User {
-  id      Int      @default(autoincrement()) @id 
-  name    String? 
+  id      Int      @default(autoincrement()) @id
+  name    String?
   email   String   @unique
   posts   Post[]
 + profile Profile?
 }
 
+model Post {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String
+  content   String?
+  published Boolean  @default(false)
+  viewCount Int      @default(0)
+  author    User?    @relation(fields: [authorId], references: [id])
+  authorId  Int?
+}
+
 +model Profile {
 +  id     Int     @default(autoincrement()) @id
 +  bio    String?
-+  userId Int     @unique
 +  user   User    @relation(fields: [userId], references: [id])
++  userId Int     @unique
 +}
 ```
 
 Once you've updated your data model, you can execute the changes against your database with the following command:
 
 ```
-npx prisma migrate dev
+npx prisma migrate dev --name add-profile
 ```
+
+This adds another migration to the `prisma/migrations` directory and creates the new `Profile` table in the database.
 
 ### 2. Update your application code
 
-You can now use your `PrismaClient` instance to perform operations against the new `Profile` table. Those operations can be used to implement new queries and mutations in the GraphQL API.
+You can now use your `PrismaClient` instance to perform operations against the new `Profile` table. Those operations can be used to implement queries and mutations in the GraphQL API.
 
-#### 2.1. Use the updated Prisma Client in your application code
+#### 2.1. Add the `Profile` type to your GraphQL schema
 
-#### 2.1. Create GraphQL type for `Profile` model using TypeGraphQL
+First, create a new `profile.ts` file add a new GraphQL type via Pothos' `prismaObject` function:
 
-You can use TypeGraphQL to expose the new `Profile` model. Create a new file named `src\Profile.ts` and add the following code:
+```diff
+// ./src/schema/profile.ts
++import { builder } from "../builder";
 
-```ts
-import "reflect-metadata";
-import { ObjectType, Field, ID } from "type-graphql";
-import { User } from "./User";
-
-@ObjectType()
-export class Profile {
-  @Field((type) => ID)
-  id: number;
-
-  @Field((type) => User, { nullable: true })
-  user?: User | null;
-
-  @Field((type) => String, { nullable: true })
-  bio?: string | null;
-}
++builder.prismaObject('Profile', {
++  fields: (t) => ({
++    id: t.exposeInt('id'),
++    bio: t.exposeString('bio', { nullable: true }),
++    user: t.relation('user'),
++  }),
++})
 ```
 
-Create a new file named `src\ProfileCreateInput.ts` with the following code:
+Update the `User` object type to include the `profile field:
 
-```ts
-import "reflect-metadata";
-import { ObjectType, Field, ID, InputType } from "type-graphql";
-import { User } from "./User";
+```diff
+// ./src/schema/user.ts
 
-@InputType()
-export class ProfileCreateInput {
-  @Field((type) => String, { nullable: true })
-  bio?: string | null;
-}
+builder.prismaObject('User', {
+  fields: (t) => ({
+    id: t.exposeInt('id'),
+    name: t.exposeString('name', { nullable: true }),
+    email: t.exposeString('email'),
+    posts: t.relation('posts'),
++    profile: t.relation('profile'),
+  }),
+})
 ```
 
-Add the `profile` field to `src\User.ts` and import the `Profile` class.
+#### 2.2. Add a `createProfile` GraphQL mutation
 
-```ts
-@Field(type => Profile, { nullable: true })
-profile?: Profile | null;
+```diff
+// ./src/schema/profile.ts
+import { builder } from "../builder";
++import { prisma } from '../db'
++import { UserUniqueInput } from './user';
+
+// ... object type
+
+
++builder.mutationField('createProfile', (t) =>
++  t.prismaField({
++    type: 'Profile',
++    args: {
++      bio: t.arg.string({ required: true }),
++      data: t.arg({ type: UserUniqueInput })
++    },
++    resolve: async (query, _parent, args, _context) =>
++      prisma.profile.create({
++        ...query,
++        data: {
++          bio: args.bio,
++          user: {
++            connect: {
++              id: args.data?.id || undefined,
++              email: args.data?.email || undefined
++            }
++          }
++        }
++      })
++  })
++)
 ```
 
-Add the `profile` field to `src\UserCreateInput.ts` and import the `ProfileCreateInput` class:
-
-```ts
-@Field(type => ProfileCreateInput, { nullable: true })
-profile?: ProfileCreateInput | null;
-```
-
-Extend the `src\UserResolver.ts` class with an additional field resolver:
-
-```ts
-@FieldResolver()
-async profile(@Root() user: User, @Ctx() ctx: Context): Promise<Profile> {
-  return (await ctx.prisma.user.findUnique({
-    where: {
-      id: user.id
-    }
-  }).profile())!
-}
-```
-
-Update the `signupUser` mutation to include the option to create a profile when you sign up a new user:
-
-```ts
-@Mutation(returns => User)
-async signupUser(
-  @Arg("data") data: UserCreateInput,
-  @Ctx() ctx: Context): Promise<User> {
-  try {
-    return await ctx.prisma.user.create({
-      data: {
-        email: data.email,
-        name: data.name,
-        profile: {
-          create: {
-            bio: data.bio?.bio
-          }
-        }
-      }
-    });
-  }
-  catch (error) {
-    throw error;
-  }
-}
-```
-
-Run the following mutation to create a user with a profile:
+Finally, you can test the new mutation like this:
 
 ```graphql
 mutation {
-  signupUser(data: {
-    email:"katla@prisma.io", 
-    profile: { bio: "Sometimes I'm an Icelandic volcano, sometimes I'm a dragon from a book."}
-  })
-  {
+  createProfile(
+    userUniqueInput: {
+      email: "mahmoud@prisma.io"
+    }
+    bio: "I like turtles"
+  ) {
     id
-    email
-    posts {
-      title
-    }
-    profile {
+    bio
+    user {
       id
-      bio
+      name
     }
   }
 }
 ```
 
-Run the following query to return a user and their profile:
+<details><summary>Expand to view more sample Prisma Client queries on <code>Profile</code></summary>
 
-```graphql
-query {
-  user(id: 1) {
-    email
-    profile {
-      id
-      bio
-    }
-    posts {
-      title
-      content
-    }
-  }
-}
-```
-
-#### 2.2. Update usage of Prisma Client
-
-As the Prisma Client API was updated, you can now also invoke "raw" operations via `prisma.profile` directly.
+Here are some more sample Prisma Client queries on the new <code>Profile</code> model:
 
 ##### Create a new profile for an existing user
 
 ```ts
 const profile = await prisma.profile.create({
   data: {
-    bio: "Hello World",
+    bio: 'Hello World',
     user: {
-      connect: { email: "alice@prisma.io" },
+      connect: { email: 'alice@prisma.io' },
     },
   },
-});
+})
 ```
 
 ##### Create a new user with a new profile
@@ -376,36 +407,37 @@ const profile = await prisma.profile.create({
 ```ts
 const user = await prisma.user.create({
   data: {
-    email: "john@prisma.io",
-    name: "John",
+    email: 'john@prisma.io',
+    name: 'John',
     profile: {
       create: {
-        bio: "Hello World",
+        bio: 'Hello World',
       },
     },
   },
-});
+})
 ```
 
 ##### Update the profile of an existing user
 
 ```ts
 const userWithUpdatedProfile = await prisma.user.update({
-  where: { email: "alice@prisma.io" },
+  where: { email: 'alice@prisma.io' },
   data: {
     profile: {
       update: {
-        bio: "Hello Friends",
+        bio: 'Hello Friends',
       },
     },
   },
-});
+})
 ```
 
+</details>
 
 ## Switch to another database (e.g. PostgreSQL, MySQL, SQL Server, MongoDB)
 
-If you want to try this example with another database than SQLite, you can adjust the the database connection in [`prisma/schema.prisma`](./prisma/schema.prisma) by reconfiguring the `datasource` block. 
+If you want to try this example with another database than SQLite, you can adjust the the database connection in [`prisma/schema.prisma`](./prisma/schema.prisma) by reconfiguring the `datasource` block.
 
 Learn more about the different connection configurations in the [docs](https://www.prisma.io/docs/reference/database-reference/connection-urls).
 

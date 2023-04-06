@@ -2,8 +2,8 @@ generator client {
   provider = "prisma-client-js"
 }
 
-generator typegraphql {
-  provider = "typegraphql-prisma"
+generator pothos {
+  provider = "prisma-pothos-types"
 }
 
 datasource db {
@@ -29,4 +29,3 @@ model Post {
   author    User?    @relation(fields: [authorId], references: [id])
   authorId  Int?
 }
-
