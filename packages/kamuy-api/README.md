@@ -13,8 +13,8 @@
 - [はじめに](#はじめに)
 - [GraphQL-API の使用](#GraphQL-APIの使用)
 - [アプリの進化](#アプリの進化)
-- [Switch to another database (e.g. PostgreSQL, MySQL, SQL Server)](#switch-to-another-database-eg-postgresql-mysql-sql-server)
-- [Next steps](#next-steps)
+- [別のデータベースに切り替える](#別のデータベースに切り替える)
+- [次のステップ](#次のステップ)
 
 ## はじめに
 
@@ -374,11 +374,11 @@ mutation {
 }
 ```
 
-<details><summary>Expand to view more sample Prisma Client queries on <code>Profile</code></summary>
+<details><summary>展開して <code>Profile</code> の <code>Prisma Client</code> クエリーをさらに表示</summary>
 
-Here are some more sample Prisma Client queries on the new <code>Profile</code> model:
+以下は、新しい <code>Profile</code> モデルでの <code>Prisma Client</code> クエリーのサンプルコードです。
 
-##### Create a new profile for an existing user
+##### 既存ユーザーの新しいプロファイルを作成する
 
 ```ts
 const profile = await prisma.profile.create({
@@ -391,7 +391,7 @@ const profile = await prisma.profile.create({
 })
 ```
 
-##### Create a new user with a new profile
+##### 新しいプロファイルで新しいユーザーを作成する
 
 ```ts
 const user = await prisma.user.create({
@@ -407,7 +407,7 @@ const user = await prisma.user.create({
 })
 ```
 
-##### Update the profile of an existing user
+##### 既存ユーザーのプロファイルを更新する
 
 ```ts
 const userWithUpdatedProfile = await prisma.user.update({
@@ -424,17 +424,17 @@ const userWithUpdatedProfile = await prisma.user.update({
 
 </details>
 
-## Switch to another database (e.g. PostgreSQL, MySQL, SQL Server, MongoDB)
+## 別のデータベースに切り替える
 
-If you want to try this example with another database than SQLite, you can adjust the the database connection in [`prisma/schema.prisma`](./prisma/schema.prisma) by reconfiguring the `datasource` block.
+別のデータベースで試してみたい場合は、`datasource` ブロックを再構成することにより、`Prisma`スキーマ定義(`./prisma/schema.prisma`) でデータベース接続を調整できます。
 
-Learn more about the different connection configurations in the [docs](https://www.prisma.io/docs/reference/database-reference/connection-urls).
+[ドキュメント](https://www.prisma.io/docs/reference/database-reference/connection-urls)でさまざまな接続構成の詳細を確認してください。
 
-<details><summary>Expand for an overview of example configurations with different databases</summary>
+<details><summary>展開して、さまざまなデータベースを使用した構成例の概要を確認します</summary>
 
 ### PostgreSQL
 
-For PostgreSQL, the connection URL has the following structure:
+PostgreSQL の場合、接続 URL の構造は次のとおりです。
 
 ```prisma
 datasource db {
@@ -443,7 +443,7 @@ datasource db {
 }
 ```
 
-Here is an example connection string with a local PostgreSQL database:
+ローカル PostgreSQL データベースを使用した接続文字列の例を次に示します。
 
 ```prisma
 datasource db {
@@ -454,7 +454,7 @@ datasource db {
 
 ### MySQL
 
-For MySQL, the connection URL has the following structure:
+MySQL の場合、接続 URL の構造は次のとおりです。
 
 ```prisma
 datasource db {
@@ -463,7 +463,7 @@ datasource db {
 }
 ```
 
-Here is an example connection string with a local MySQL database:
+ローカルの MySQL データベースを使用した接続文字列の例を次に示します。
 
 ```prisma
 datasource db {
@@ -474,7 +474,7 @@ datasource db {
 
 ### Microsoft SQL Server
 
-Here is an example connection string with a local Microsoft SQL Server database:
+ローカルの Microsoft SQL Server データベースとの接続文字列の例を次に示します。
 
 ```prisma
 datasource db {
@@ -485,7 +485,7 @@ datasource db {
 
 ### MongoDB
 
-Here is an example connection string with a local MongoDB database:
+ローカル MongoDB データベースを使用した接続文字列の例を次に示します。
 
 ```prisma
 datasource db {
@@ -496,9 +496,9 @@ datasource db {
 
 </details>
 
-## Next steps
+## 次のステップ
 
-- Check out the [Prisma docs](https://www.prisma.io/docs)
-- Share your feedback in the [`#product-wishlist`](https://prisma.slack.com/messages/CKQTGR6T0/) channel on the [Prisma Slack](https://slack.prisma.io/)
-- Create issues and ask questions on [GitHub](https://github.com/prisma/prisma/)
-- Watch our biweekly "What's new in Prisma" livestreams on [Youtube](https://www.youtube.com/channel/UCptAHlN1gdwD89tFM3ENb6w)
+- [Prisma ドキュメント](https://www.prisma.io/docs) を確認する
+- [Prisma Slack](https://slack.prisma.io/) の [`#product-wishlist`](https://prisma.slack.com/messages/CKQTGR6T0/) チャンネルでフィードバックを共有してください
+- [GitHub](https://github.com/prisma/prisma/) で問題を作成して質問する
+- [Youtube](https://www.youtube.com/channel/UCptAHlN1gdwD89tFM3ENb6w) で隔週の `What's new in Prisma` ライブストリームをご覧ください。
