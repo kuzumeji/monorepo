@@ -1,0 +1,8 @@
+# SEE https://pnpm.io/ja/pnpm-workspace_yaml
+packages:
+  # packages/ の直下のサブディレクトリにあるすべてのパッケージ
+  - "packages/*"
+  # components/ のサブディレクトリ内のすべてのパッケージ
+  - "components/**"
+  # test ディレクトリ内にあるパッケージを除外する
+  - "!**/test/**"
