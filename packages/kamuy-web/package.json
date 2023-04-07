@@ -44,5 +44,11 @@
     "vite": "^4.2.0",
     "vitest": "^0.29.8"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@sentry/browser": "^7.47.0",
+    "@sentry/node": "^7.47.0",
+    "@sentry/svelte": "^7.47.0",
+    "@sentry/tracing": "^7.47.0"
+  }
 }
