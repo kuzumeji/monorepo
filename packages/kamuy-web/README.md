@@ -1,28 +1,38 @@
-# `Svelte`プロジェクト(`create-svelte`)
+# create-svelte
 
-`Svelte`プロジェクトのビルドに必要なものは、[create-svelte](https://github.com/sveltejs/kit/tree/master/packages/create-svelte) に搭載されています。
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
-## プロジェクトの作成
+## Creating a project
+
+If you're seeing this, you've probably already done this step. Congrats!
 
 ```bash
-# create a new project in kamuy-web
-pnpm create svelte@latest kamuy-web
+# create a new project in the current directory
+npm create svelte@latest
+
+# create a new project in my-app
+npm create svelte@latest my-app
 ```
 
-## 開発
+## Developing
 
-依存関係のインストールと開発サーバーの開始
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
 ```bash
-pnpm run dev
+npm run dev
+
 # or start the server and open the app in a new browser tab
-pnpm run dev --open
+npm run dev -- --open
 ```
 
-## ビルド
+## Building
 
-アプリケーションの製品ビルド(`$ pnpm run build`)
+To create a production version of your app:
 
-製品ビルドのプレビュー(`$ npm run preview`)
+```bash
+npm run build
+```
 
-> アプリケーションのデプロイには、ターゲット向け[アダプター](https://kit.svelte.dev/docs/adapters)のインストールが必要なときがあります。
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
