@@ -32,5 +32,8 @@
 		"vite": "^4.2.1",
 		"vitest": "^0.29.8"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"realm-web": "^2.0.0"
+	}
 }
