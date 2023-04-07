@@ -12,7 +12,7 @@
 		const user = await app.logIn(Realm.Credentials.anonymous());
 		console.assert(user.id === app.currentUser?.id);
 		user.mongoClient('Cluster0').db('kamuy').collection('User')
-			?.findOne()
+			?.findOne({name: "anon"})
 			.then((data) => {
 				console.log('user:' + JSON.stringify(data));
 				username = data['name'];
