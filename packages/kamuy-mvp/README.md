@@ -1,38 +1,43 @@
-# create-svelte
+# MVP
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+## プロジェクトを作成する
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
+[SvelteKit] プロジェクトを作成する
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+pnpm create svelte@latest kamuy-mvp
+cd kamuy-mvp
+pnpm install
 ```
 
-## Developing
+- 選択肢
+  - Which Svelte app template?
+    - [x] Skeleton project
+  - Add type checking with TypeScript?
+    - [x] Yes, using TypeScript syntax
+  - Select additional options (use arrow keys/space bar)
+    - [x] Add ESLint for code linting, Add Prettier for code formatting, Add Playwright for browser testing, Add Vitest for unit testing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+DB として [Supabase] プロジェクトを作成する
+
+- [kamuy-mvp]
+
+ORM として [Prisma] をセットアップする
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+pnpm add -D prisma ts-node @types/node
+pnpm add @prisma/client
+pnpm exec prisma init
 ```
 
-## Building
+`.env` ファイルへ DB 接続先を設定する
 
-To create a production version of your app:
+> 参考: [Supabase] > [kamuy-mvp] > `Project Settings` > `Database` > `Connection string` > `URI`
 
-```bash
-npm run build
-```
+[Prisma] でモデリングし、データ投入する
+> 参考: https://www.prisma.io/docs/guides/migrate/seed-database
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+[SvelteKit]: https://kit.svelte.jp/
+[Supabase]: https://supabase.com/
+[kamuy-mvp]: (https://app.supabase.com/project/yishivdsetcfseylrrjo)
+[Prisma]: https://www.prisma.io/
