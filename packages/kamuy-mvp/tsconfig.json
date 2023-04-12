@@ -8,7 +8,10 @@
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
-		"strict": true
+		"strict": true,
+		// Flag 'importsNotUsedAsValues' is deprecated and will stop functioning in TypeScript 5.5.
+		// Specify 'ignoreDeprecations: "5.0"' to silence this error.
+		"ignoreDeprecations": "5.0"
 	}
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
 	//
