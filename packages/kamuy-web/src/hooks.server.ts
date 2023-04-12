@@ -1,6 +1,6 @@
 import * as SentryNode from '@sentry/node';
 import '@sentry/tracing';
-import type { HandleServerError } from '@sveltejs/kit'
+import type { HandleServerError } from '@sveltejs/kit';
 
 SentryNode.init({
 	dsn: 'https://61b82cdb8db24ca5baf44979cdccf49b@o4504983043964928.ingest.sentry.io/4504983068278784',

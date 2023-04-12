@@ -1,4 +1,4 @@
-import type { HandleClientError } from '@sveltejs/kit'
+import type { HandleClientError } from '@sveltejs/kit';
 import * as SentrySvelte from '@sentry/svelte';
 import { BrowserTracing } from '@sentry/browser';
 
