@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	export let data: PageData;
-	const user = data;
 </script>
 
 <section>
@@ -12,27 +11,23 @@
 		<tbody>
 			<tr>
 				<td>ユーザー名</td>
-				<td>{user.username}</td>
-			</tr>
-			<tr>
-				<td>性別</td>
-				<td>{user.sex}</td>
+				<td>{data.user.username}</td>
 			</tr>
 			<tr>
 				<td>住所</td>
-				<td>{user.address}</td>
+				<td>{data.user.address}</td>
 			</tr>
 			<tr>
 				<td>氏名</td>
-				<td>{user.name}</td>
+				<td>{data.user.name}</td>
 			</tr>
 			<tr>
 				<td>メールアドレス</td>
-				<td>{user.email}</td>
+				<td>{data.user.email}</td>
 			</tr>
 			<tr>
 				<td>生年月日</td>
-				<td>{user.birthday.toISOString().split('T')[0]}</td>
+				<td>{data.birthday}</td>
 			</tr>
 		</tbody>
 	</table>

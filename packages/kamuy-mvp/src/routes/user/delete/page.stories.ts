@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/svelte";
 import Page from "./+page.svelte";
+import { standard } from './page.mock';
 
 const meta = {
   title: "Routes/User-Delete",
@@ -15,6 +16,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    data: { id: 1, email: "foo@gmail.com", name: "foo" },
+		data: { ...standard() }
   },
 };

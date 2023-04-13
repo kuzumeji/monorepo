@@ -20,7 +20,6 @@ async function main() {
 				await prisma.user.create({
 					data: {
 						username: data['username'],
-						sex: data['sex'],
 						address: data['address'],
 						name: data['name'],
 						email: data['email'],

@@ -1,18 +1,15 @@
-// モックデータ定義：メタ構文変数(RFC 3092)
+// モックデータ定義
 export const standard = () => ({
 	users: [
-		{ id: 1, username: 'foo', name: 'foo\'s fullname', email: 'foo@gmail.com' },
-		{ id: 2, username: 'bar', name: 'bar\'s fullname', email: 'bar@gmail.com' },
-		{ id: 3, username: 'baz', name: 'baz\'s fullname', email: 'baz@gmail.com' },
-		{ id: 4, username: 'qux', name: 'qux\'s fullname', email: 'qux@gmail.com' },
-		{ id: 5, username: 'quux', name: 'quux\'s fullname', email: 'quux@gmail.com' },
-		{ id: 6, username: 'corge', name: 'corge\'s fullname', email: 'corge@gmail.com' },
-		{ id: 7, username: 'grault', name: 'grault\'s fullname', email: 'grault@gmail.com' },
-		{ id: 8, username: 'garply', name: 'garply\'s fullname', email: 'garply@gmail.com' },
-		{ id: 9, username: 'waldo', name: 'waldo\'s fullname', email: 'waldo@gmail.com' },
-		{ id: 10, username: 'fred', name: 'fred\'s fullname', email: 'fred@gmail.com' },
-		{ id: 11, username: 'plugh', name: 'plugh\'s fullname', email: 'plugh@gmail.com' },
-		{ id: 12, username: 'xyzzy', name: 'xyzzy\'s fullname', email: 'xyzzy@gmail.com' },
-		{ id: 13, username: 'thud', name: 'thud\'s fullname', email: 'thud@gmail.com' },
+		{ id: 1, username: 'kayla50', name: 'Melissa Parker', email: 'cunninghammegan@hotmail.com' },
+		{ id: 2, username: 'turnerangela', name: 'Mary Farrell', email: 'andre88@yahoo.com' },
+		{ id: 3, username: 'hhernandez', name: 'John Williams', email: 'tracimelton@yahoo.com' },
+		{ id: 4, username: 'hflores', name: 'Jeffrey Fox', email: 'karenwright@yahoo.com' },
+		{ id: 5, username: 'danielle54', name: 'Melissa Christensen', email: 'cwalker@hotmail.com' },
+		{ id: 6, username: 'patricksimmons', name: 'Robert Castaneda', email: 'martinryan@hotmail.com' },
+		{ id: 7, username: 'josemoore', name: 'Jennifer Smith', email: 'john69@hotmail.com' },
+		{ id: 8, username: 'anne36', name: 'Barbara Smith', email: 'jpatterson@gmail.com' },
+		{ id: 9, username: 'holly19', name: 'Bryan Wells', email: 'martinstephanie@gmail.com' },
+		{ id: 10, username: 'thomas34', name: 'Melissa Herrera', email: 'jonestimothy@yahoo.com' },
 	]
 });
