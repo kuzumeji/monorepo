@@ -36,7 +36,7 @@ nav ul li:last-child ul {
 header,
 main,
 footer {
-	padding: 0rem;
+	padding: 0rem 2rem;
 }
 nav {
 	margin-bottom: 0rem;

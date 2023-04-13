@@ -6,7 +6,7 @@
     <a href="/"
       ><img
         alt="Logo"
-        src="https://via.placeholder.com/100x30/118bee/FFF/?text=Kamuy"
+        src="https://placehold.co/100x50/118bee/white/png?text=Kamuy&font=roboto"
         height="50"
       /></a
     >
@@ -26,7 +26,6 @@
   <slot />
 </main>
 <footer>
-  <hr />
   <p>
     <small
       >Kamuy is <a href="https://github.com/ua4iugi/kamuy#readme"
