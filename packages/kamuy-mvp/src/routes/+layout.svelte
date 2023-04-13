@@ -1,3 +1,7 @@
+<script>
+  import '../mvp.css'
+  import '../mvp-var.css'
+</script>
 <svelte:head>
   <title>home (kamuy)</title>
 </svelte:head>

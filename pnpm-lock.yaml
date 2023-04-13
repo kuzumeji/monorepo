@@ -65,6 +65,27 @@ importers:
       '@playwright/test':
         specifier: ^1.32.3
         version: 1.32.3
+      '@storybook/addon-essentials':
+        specifier: ^7.0.4
+        version: 7.0.4(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/addon-interactions':
+        specifier: ^7.0.4
+        version: 7.0.4(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/addon-links':
+        specifier: ^7.0.4
+        version: 7.0.4(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/blocks':
+        specifier: ^7.0.4
+        version: 7.0.4(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/svelte':
+        specifier: ^7.0.4
+        version: 7.0.4(svelte@3.58.0)
+      '@storybook/sveltekit':
+        specifier: ^7.0.4
+        version: 7.0.4(react-dom@18.2.0)(react@18.2.0)(svelte@3.58.0)(typescript@5.0.4)(vite@4.2.1)
+      '@storybook/testing-library':
+        specifier: ^0.0.14-next.2
+        version: 0.0.14-next.2
       '@sveltejs/adapter-auto':
         specifier: ^2.0.0
         version: 2.0.0(@sveltejs/kit@1.15.4)
@@ -89,6 +110,9 @@ importers:
       eslint-config-prettier:
         specifier: ^8.5.0
         version: 8.8.0(eslint@8.38.0)
+      eslint-plugin-storybook:
+        specifier: ^0.6.11
+        version: 0.6.11(eslint@8.38.0)(typescript@5.0.4)
       eslint-plugin-svelte3:
         specifier: ^4.0.0
         version: 4.0.0(eslint@8.38.0)(svelte@3.58.0)
@@ -104,12 +128,21 @@ importers:
       prisma:
         specifier: ^4.12.0
         version: 4.12.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+      storybook:
+        specifier: ^7.0.4
+        version: 7.0.4
       svelte:
         specifier: ^3.54.0
         version: 3.58.0
       svelte-check:
         specifier: ^3.0.1
-        version: 3.2.0(svelte@3.58.0)
+        version: 3.2.0(@babel/core@7.21.4)(svelte@3.58.0)
       ts-node:
         specifier: 10.9.1
         version: 10.9.1(@types/node@18.15.11)(typescript@5.0.4)
@@ -3049,17 +3082,6 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/channel-postmessage@7.0.3:
-    resolution: {integrity: sha512-bDTCVpEJ9UaFnbcgfMi13xVWzGC4Kc5/3iPEjOEWY8qUN4AEXw4Svken1Q4waSoadYLnAwGfjnc4UWBjitUSoQ==}
-    dependencies:
-      '@storybook/channels': 7.0.3
-      '@storybook/client-logger': 7.0.3
-      '@storybook/core-events': 7.0.3
-      '@storybook/global': 5.0.0
-      qs: 6.11.1
-      telejson: 7.1.0
-    dev: true
-
   /@storybook/channel-postmessage@7.0.4:
     resolution: {integrity: sha512-KInHB3iSBgMxGkDmOMBu+B+ohxi2NzDpcl9yA5+xVuqG8Q6gJBurDYBsinq2zEZ1ceZYSoCseqJaH2jQFh/Oeg==}
     dependencies:
@@ -3078,10 +3100,6 @@ packages:
       '@storybook/client-logger': 7.0.4
       '@storybook/global': 5.0.0
       telejson: 7.1.0
-    dev: true
-
-  /@storybook/channels@7.0.3:
-    resolution: {integrity: sha512-X+78KlKRPfqojOj2j34qpXqcwh5O6/oIhqXB1PORPmoVPuvngSvjqeczJI11g+qEiBbs3l1CkwA/RRGnnuE1ew==}
     dev: true
 
   /@storybook/channels@7.0.4:
@@ -3135,12 +3153,6 @@ packages:
       - encoding
       - supports-color
       - utf-8-validate
-    dev: true
-
-  /@storybook/client-logger@7.0.3:
-    resolution: {integrity: sha512-Hb+ecOEDDvXM61ElbAuKfQ1a0I2mIDkbtlS26C7S2GxRHRGE8aXA2toAKvBaJ4niQrXlVCR0umYfAZeDL85veg==}
-    dependencies:
-      '@storybook/global': 5.0.0
     dev: true
 
   /@storybook/client-logger@7.0.4:
@@ -3218,10 +3230,6 @@ packages:
       ts-dedent: 2.2.0
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /@storybook/core-events@7.0.3:
-    resolution: {integrity: sha512-r8+pUMf9cQlXMWgZGrBBG9SKK6uWHdb1Lub+vjuAz6I5jXVI/IyfnGbfRPGkLmLynY6NugsAMnjn9oifSBD4cA==}
     dev: true
 
   /@storybook/core-events@7.0.4:
@@ -3339,16 +3347,6 @@ packages:
     resolution: {integrity: sha512-FcOqPAXACP0I3oJ/ws6/rrPT9WGhu915Cg8D02a9YxLo0DE9zI+a9A5gRGvmQ09fiWPukqI8ZAEoQEdWUKMQdQ==}
     dev: true
 
-  /@storybook/instrumenter@7.0.3:
-    resolution: {integrity: sha512-31LYZNYy+nY0yqcaOrG9r3a8C1QpFWpcs53tmFd2kuUFqS2/30opnUm4dHHmKEy1U6jxI8Z1lsWpU9Hg2r7gDA==}
-    dependencies:
-      '@storybook/channels': 7.0.3
-      '@storybook/client-logger': 7.0.3
-      '@storybook/core-events': 7.0.3
-      '@storybook/global': 5.0.0
-      '@storybook/preview-api': 7.0.3
-    dev: true
-
   /@storybook/instrumenter@7.0.4:
     resolution: {integrity: sha512-HU+hVvym/KYiFhvpPSk5ugI0WjYQw8h/AJn/EY+oAb9vQzF2+ioS+IG5cK8usRQRwNqKFvdcKq1PNdYBj1rmGg==}
     dependencies:
@@ -3403,26 +3401,6 @@ packages:
 
   /@storybook/postinstall@7.0.4:
     resolution: {integrity: sha512-Fl6aUg1KeIlLTsJoODSUAWzvS8QmkSuwQZClz644f++oFn8fDoM+h4S4LO2YMidWM1INHsJvdhrMu26m/CFDLA==}
-    dev: true
-
-  /@storybook/preview-api@7.0.3:
-    resolution: {integrity: sha512-6QsJikmBTc+/5LnNpPB5aI0um8MlJhbeQRycI+ISclwBDEJDsZheoz8yha4KBSOqLBwKpOFtKB1IXarBjkuigA==}
-    dependencies:
-      '@storybook/channel-postmessage': 7.0.3
-      '@storybook/channels': 7.0.3
-      '@storybook/client-logger': 7.0.3
-      '@storybook/core-events': 7.0.3
-      '@storybook/csf': 0.1.0
-      '@storybook/global': 5.0.0
-      '@storybook/types': 7.0.3
-      '@types/qs': 6.9.7
-      dequal: 2.0.3
-      lodash: 4.17.21
-      memoizerific: 1.11.3
-      qs: 6.11.1
-      synchronous-promise: 2.0.17
-      ts-dedent: 2.2.0
-      util-deprecate: 1.0.2
     dev: true
 
   /@storybook/preview-api@7.0.4:
@@ -3558,8 +3536,8 @@ packages:
   /@storybook/testing-library@0.0.14-next.2:
     resolution: {integrity: sha512-i/SLSGm0o978ELok/SB4Qg1sZ3zr+KuuCkzyFqcCD0r/yf+bG35aQGkFqqxfSAdDxuQom0NO02FE+qys5Eapdg==}
     dependencies:
-      '@storybook/client-logger': 7.0.3
-      '@storybook/instrumenter': 7.0.3
+      '@storybook/client-logger': 7.0.4
+      '@storybook/instrumenter': 7.0.4
       '@testing-library/dom': 8.20.0
       '@testing-library/user-event': 13.5.0(@testing-library/dom@8.20.0)
       ts-dedent: 2.2.0
@@ -3577,15 +3555,6 @@ packages:
       memoizerific: 1.11.3
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-    dev: true
-
-  /@storybook/types@7.0.3:
-    resolution: {integrity: sha512-AafPE2QbEaT+rQn53W1UOcteP1W7iYWt1DbMJZSxXMLYVatjsoirbfMKHy/9S63Whee39CTjOxcXUBYNs+5jCA==}
-    dependencies:
-      '@storybook/channels': 7.0.3
-      '@types/babel__core': 7.20.0
-      '@types/express': 4.17.17
-      file-system-cache: 2.0.2
     dev: true
 
   /@storybook/types@7.0.4:
@@ -3903,7 +3872,7 @@ packages:
   /@types/node-fetch@2.6.3:
     resolution: {integrity: sha512-ETTL1mOEdq/sxUtgtOhKjyB2Irra4cjxksvcMUR5Zr4n+PxVhsCD9WS46oPbHL3et9Zde7CNRr+WUNlcHvsX+w==}
     dependencies:
-      '@types/node': 16.18.23
+      '@types/node': 18.15.11
       form-data: 3.0.1
     dev: true
 
@@ -3975,7 +3944,7 @@ packages:
   /@types/sax@1.2.4:
     resolution: {integrity: sha512-pSAff4IAxJjfAXUG6tFkO7dsSbTmf8CtUpfhhZ5VhkRpC4628tJhh3+V6H1E+/Gs9piSzYKT5yzHO5M4GG9jkw==}
     dependencies:
-      '@types/node': 17.0.45
+      '@types/node': 18.15.11
     dev: false
 
   /@types/scheduler@0.16.3:
@@ -5812,7 +5781,7 @@ packages:
       eslint-scope: 7.1.1
       eslint-utils: 3.0.0(eslint@8.4.1)
       eslint-visitor-keys: 3.4.0
-      espree: 9.2.0
+      espree: 9.5.1
       esquery: 1.5.0
       esutils: 2.0.3
       fast-deep-equal: 3.1.3
@@ -10057,33 +10026,6 @@ packages:
       - sugarss
     dev: true
 
-  /svelte-check@3.2.0(svelte@3.58.0):
-    resolution: {integrity: sha512-6ZnscN8dHEN5Eq5LgIzjj07W9nc9myyBH+diXsUAuiY/3rt0l65/LCIQYlIuoFEjp2F1NhXqZiJwV9omPj9tMw==}
-    hasBin: true
-    peerDependencies:
-      svelte: ^3.55.0
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.18
-      chokidar: 3.5.3
-      fast-glob: 3.2.12
-      import-fresh: 3.3.0
-      picocolors: 1.0.0
-      sade: 1.8.1
-      svelte: 3.58.0
-      svelte-preprocess: 5.0.3(svelte@3.58.0)(typescript@5.0.4)
-      typescript: 5.0.4
-    transitivePeerDependencies:
-      - '@babel/core'
-      - coffeescript
-      - less
-      - postcss
-      - postcss-load-config
-      - pug
-      - sass
-      - stylus
-      - sugarss
-    dev: true
-
   /svelte-hmr@0.15.1(svelte@3.58.0):
     resolution: {integrity: sha512-BiKB4RZ8YSwRKCNVdNxK/GfY+r4Kjgp9jCLEy0DuqAKfmQtpL38cQK3afdpjw4sqSs4PLi3jIPJIFp259NkZtA==}
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
@@ -10132,53 +10074,6 @@ packages:
         optional: true
     dependencies:
       '@babel/core': 7.21.4
-      '@types/pug': 2.0.6
-      detect-indent: 6.1.0
-      magic-string: 0.27.0
-      sorcery: 0.11.0
-      strip-indent: 3.0.0
-      svelte: 3.58.0
-      typescript: 5.0.4
-    dev: true
-
-  /svelte-preprocess@5.0.3(svelte@3.58.0)(typescript@5.0.4):
-    resolution: {integrity: sha512-GrHF1rusdJVbOZOwgPWtpqmaexkydznKzy5qIC2FabgpFyKN57bjMUUUqPRfbBXK5igiEWn1uO/DXsa2vJ5VHA==}
-    engines: {node: '>= 14.10.0'}
-    requiresBuild: true
-    peerDependencies:
-      '@babel/core': ^7.10.2
-      coffeescript: ^2.5.1
-      less: ^3.11.3 || ^4.0.0
-      postcss: ^7 || ^8
-      postcss-load-config: ^2.1.0 || ^3.0.0 || ^4.0.0
-      pug: ^3.0.0
-      sass: ^1.26.8
-      stylus: ^0.55.0
-      sugarss: ^2.0.0 || ^3.0.0 || ^4.0.0
-      svelte: ^3.23.0
-      typescript: '>=3.9.5 || ^4.0.0 || ^5.0.0'
-    peerDependenciesMeta:
-      '@babel/core':
-        optional: true
-      coffeescript:
-        optional: true
-      less:
-        optional: true
-      postcss:
-        optional: true
-      postcss-load-config:
-        optional: true
-      pug:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      typescript:
-        optional: true
-    dependencies:
       '@types/pug': 2.0.6
       detect-indent: 6.1.0
       magic-string: 0.27.0
