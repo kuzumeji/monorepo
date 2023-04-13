@@ -10,7 +10,6 @@ async function main() {
 		headers: { 'x-api-key': `${process.env.NINJAS_API_KEY}` }
 	};
 	const USER_COUNT = 10;
-	await prisma.post.deleteMany();
 	await prisma.user.deleteMany();
 	for (let i = 0; i < USER_COUNT; i++) {
 		fetch(URL, OPTIONS)
@@ -20,32 +19,12 @@ async function main() {
 				console.dir(data);
 				await prisma.user.create({
 					data: {
-						email: data['email'],
+						username: data['username'],
+						sex: data['sex'],
+						address: data['address'],
 						name: data['name'],
-						posts: {
-							create: [
-								{
-									title: 'username',
-									content: data['username'],
-                  published: true
-								},
-								{
-									title: 'sex',
-									content: data['sex'],
-                  published: true
-								},
-								{
-									title: 'address',
-									content: data['address'],
-                  published: true
-								},
-								{
-									title: 'birthday',
-									content: data['birthday'],
-                  published: true
-								}
-              ]
-						}
+						email: data['email'],
+						birthday: new Date(data['birthday'])
 					}
 				});
 			})
