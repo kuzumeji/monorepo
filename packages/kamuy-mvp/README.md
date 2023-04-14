@@ -35,6 +35,7 @@ pnpm exec prisma init
 > 参考: [Supabase] > [kamuy-mvp] > `Project Settings` > `Database` > `Connection string` > `URI`
 
 [Prisma] でモデリングし、データ投入する
+
 > 参考: https://www.prisma.io/docs/guides/migrate/seed-database
 
 [SvelteKit]: https://kit.svelte.jp/

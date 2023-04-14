@@ -5,7 +5,7 @@ export const create = () => ({
 		username: null,
 		address: null,
 		name: null,
-		email: null,
+		email: null
 	},
 	birthday: null
 });
@@ -15,7 +15,7 @@ export const edit = () => ({
 		username: 'kayla50',
 		address: '42427 Mary Crescent Apt. 392, Alicefort, ID 32703',
 		name: 'Melissa Parker',
-		email: 'cunninghammegan@hotmail.com',
+		email: 'cunninghammegan@hotmail.com'
 	},
 	birthday: '1921-04-14'
 });

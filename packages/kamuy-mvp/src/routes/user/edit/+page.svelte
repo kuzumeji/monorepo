@@ -39,7 +39,13 @@
 			bind:value={data.user.address}
 		/>
 		<label for="name">氏名：</label>
-		<input id="name" name="name" type="text" placeholder="例：山本太郎" bind:value={data.user.name} />
+		<input
+			id="name"
+			name="name"
+			type="text"
+			placeholder="例：山本太郎"
+			bind:value={data.user.name}
+		/>
 		<label for="email">メールアドレス：</label>
 		<input
 			id="email"
