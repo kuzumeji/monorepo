@@ -4,10 +4,8 @@
 </script>
 
 <section>
-	<blockquote>ユーザの{data.user.id != null ? '編集' : '作成'}</blockquote>
-</section>
-<section>
 	<form method="POST">
+		<blockquote>ユーザの{data.user.id == null ? '作成' : '編集'}</blockquote>
 		<input id="id" name="id" type="hidden" bind:value={data.user.id} />
 		<label for="username">ユーザー名：</label>
 		{#if data.user.id == null}
@@ -59,7 +57,12 @@
 		<input id="birthday" name="birthday" type="date" bind:value={data.birthday} />
 		<blockquote>
 			<a href="/user"><i>戻る</i></a>
-			<button type="submit">保存</button>
+			{#if data.user.id == null}
+				<button formaction="?/create">保存</button>
+			{:else}
+				<button formaction="?/update">保存</button>
+				<button formaction="?/delete">削除</button>
+			{/if}
 		</blockquote>
 	</form>
 </section>

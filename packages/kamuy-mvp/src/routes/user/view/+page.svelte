@@ -4,10 +4,10 @@
 </script>
 
 <section>
-	<blockquote>ユーザの閲覧</blockquote>
-</section>
-<section>
 	<table>
+		<caption>
+			<blockquote>ユーザの閲覧</blockquote>
+		</caption>
 		<tbody>
 			<tr>
 				<td>ユーザー名</td>
