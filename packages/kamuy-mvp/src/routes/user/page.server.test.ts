@@ -22,5 +22,6 @@ describe('/userをテスト', () => {
 		expect(result.users[2].username).toBe('baz');
 		expect(result.users[2].name).toBe('baz');
 		expect(result.users[2].email).toBe('baz@gmail.com');
+    expect(result.users[0].id).toBeLessThan(result.users[2].id)
 	});
 });
