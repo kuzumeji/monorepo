@@ -6,7 +6,7 @@
 <section>
 	<table>
 		<caption>
-			<blockquote>ユーザの閲覧</blockquote>
+			<h2>ユーザーの閲覧</h2>
 		</caption>
 		<tbody>
 			<tr>

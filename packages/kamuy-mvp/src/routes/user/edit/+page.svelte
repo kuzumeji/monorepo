@@ -5,7 +5,7 @@
 
 <section>
 	<form method="POST">
-		<blockquote>ユーザの{data.user.id == null ? '作成' : '編集'}</blockquote>
+		<h2>ユーザーの{data.user.id == null ? '作成' : '編集'}</h2>
 		<input id="id" name="id" type="hidden" bind:value={data.user.id} />
 		<label for="username">ユーザー名：</label>
 		{#if data.user.id == null}
