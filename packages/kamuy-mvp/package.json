@@ -14,7 +14,7 @@
 		"format": "prettier --plugin-search-dir . --write src",
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build",
-		"prebuild": "prisma generate"
+		"prebuild": "npx prisma generate"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.32.3",
