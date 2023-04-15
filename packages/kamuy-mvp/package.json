@@ -13,8 +13,7 @@
 		"lint": "prettier --plugin-search-dir . --check src && eslint src",
 		"format": "prettier --plugin-search-dir . --write src",
 		"storybook": "storybook dev -p 6006",
-		"build-storybook": "storybook build",
-		"prebuild": "npx prisma generate"
+		"build-storybook": "storybook build"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.32.3",
