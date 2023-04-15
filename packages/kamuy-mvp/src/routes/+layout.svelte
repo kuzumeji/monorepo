@@ -19,7 +19,7 @@
 			<li><a href="/">Home</a></li>
 			<li><a href="/user">User</a></li>
 			<li>
-				<a href="#3">三</a>
+				<a href="#3">☰</a>
 				<ul>
 					<li><a href="/about">About</a></li>
 				</ul>
