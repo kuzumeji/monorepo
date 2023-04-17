@@ -1,1 +1,0 @@
-import{JsPackageManager,JsPackageManagerFactory,getEnvConfig,getPackageDetails,parseList,useNpmWarning,versions_default}from"./chunk-LOSDIZPO.mjs";export{JsPackageManager,JsPackageManagerFactory,getEnvConfig,getPackageDetails,parseList,useNpmWarning,versions_default as versions};
