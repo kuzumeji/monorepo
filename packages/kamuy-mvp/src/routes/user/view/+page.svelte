@@ -4,36 +4,22 @@
 </script>
 
 <section>
-	<table>
-		<caption>
-			<h2>ユーザーの閲覧</h2>
-		</caption>
-		<tbody>
-			<tr>
-				<td>ユーザー名</td>
-				<td>{data.user.username}</td>
-			</tr>
-			<tr>
-				<td>住所</td>
-				<td>{data.user.address}</td>
-			</tr>
-			<tr>
-				<td>氏名</td>
-				<td>{data.user.name}</td>
-			</tr>
-			<tr>
-				<td>メールアドレス</td>
-				<td>{data.user.email}</td>
-			</tr>
-			<tr>
-				<td>生年月日</td>
-				<td>{data.birthday}</td>
-			</tr>
-		</tbody>
-	</table>
+	<blockquote>
+		<h2>ユーザーの詳細</h2>
+	</blockquote>
+</section>
+<section>
+	<aside>
+		<p>{data.user.username}</p>
+		<p>{data.user.address}</p>
+		<p>{data.user.name}</p>
+		<p>{data.user.email}</p>
+		<p>{data.birthday}</p>
+	</aside>
 </section>
 <section>
 	<blockquote>
 		<a href="/user"><i>戻る</i></a>
+		<a href="/user/edit?id={data.user.id}"><b>編集</b></a>
 	</blockquote>
 </section>
