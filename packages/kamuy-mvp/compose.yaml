@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    environment:
+      - TZ=JST-9
+      - LANG=ja_JP.UTF-8
+    volumes:
+      - .:/app
+    working_dir: /app
+    # network_mode: host
+    ports:
+      - "5173:5173"
+    tty: true
