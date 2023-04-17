@@ -1,59 +1,59 @@
-import { Prisma } from '@prisma/client';
-import { db } from '$lib/server/prisma';
+import { Prisma } from '@prisma/client'
+import { db } from '$lib/server/prisma'
 
 export class UserRepository {
-	_user;
+	_user
 	constructor() {
-		this._user = db.user;
+		this._user = db.user
 	}
 	async create(aUser: Prisma.UserCreateInput) {
 		try {
-			return await this._user.create({ data: aUser });
+			return await this._user.create({ data: aUser })
 		} catch (e: unknown) {
 			if (e instanceof Prisma.PrismaClientKnownRequestError) {
-				console.error(e.message + ':' + e.message);
+				console.error(e.message + ':' + e.message)
 			}
-			throw e;
+			throw e
 		}
 	}
 	async findMany() {
 		try {
-			return await this._user.findMany({ orderBy: [{ id: 'asc' }] });
+			return await this._user.findMany({ orderBy: [{ id: 'asc' }] })
 		} catch (e: unknown) {
 			if (e instanceof Prisma.PrismaClientKnownRequestError) {
-				console.error(e.message + ':' + e.message);
+				console.error(e.message + ':' + e.message)
 			}
-			throw e;
+			throw e
 		}
 	}
 	async findUnique(id: number) {
 		try {
-			return await this._user.findUnique({ where: { id } });
+			return await this._user.findUnique({ where: { id } })
 		} catch (e: unknown) {
 			if (e instanceof Prisma.PrismaClientKnownRequestError) {
-				console.error(e.message + ':' + e.message);
+				console.error(e.message + ':' + e.message)
 			}
-			throw e;
+			throw e
 		}
 	}
 	async updateUnique(id: number, user: Prisma.UserUpdateInput) {
 		try {
-			return await this._user.update({ where: { id }, data: user });
+			return await this._user.update({ where: { id }, data: user })
 		} catch (e: unknown) {
 			if (e instanceof Prisma.PrismaClientKnownRequestError) {
-				console.error(e.message + ':' + e.message);
+				console.error(e.message + ':' + e.message)
 			}
-			throw e;
+			throw e
 		}
 	}
 	async deleteUnique(id: number) {
 		try {
-			return await this._user.delete({ where: { id } });
+			return await this._user.delete({ where: { id } })
 		} catch (e: unknown) {
 			if (e instanceof Prisma.PrismaClientKnownRequestError) {
-				console.error(e.message + ':' + e.message);
+				console.error(e.message + ':' + e.message)
 			}
-			throw e;
+			throw e
 		}
 	}
 }

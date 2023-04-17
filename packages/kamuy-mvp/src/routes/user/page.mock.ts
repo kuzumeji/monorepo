@@ -12,4 +12,4 @@ export const standard = () => ({
 		{ id: 9, name: 'Bryan Wells', email: 'martinstephanie@gmail.com' },
 		{ id: 10, name: 'Melissa Herrera', email: 'jonestimothy@yahoo.com' }
 	]
-});
+})

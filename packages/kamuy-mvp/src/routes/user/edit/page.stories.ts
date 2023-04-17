@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/svelte';
-import Page from './+page.svelte';
-import { create, edit } from './page.mock';
+import type { Meta, StoryObj } from '@storybook/svelte'
+import Page from './+page.svelte'
+import { create, edit } from './page.mock'
 
 const meta = {
 	title: 'Routes/User-Edit',
@@ -9,18 +9,18 @@ const meta = {
 		// More on how to position stories at: https://storybook.js.org/docs/7.0/svelte/configure/story-layout
 		layout: 'fullscreen'
 	}
-} satisfies Meta<Page>;
+} satisfies Meta<Page>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Create: Story = {
 	args: {
 		data: { ...create() }
 	}
-};
+}
 export const Edit: Story = {
 	args: {
 		data: { ...edit() }
 	}
-};
+}

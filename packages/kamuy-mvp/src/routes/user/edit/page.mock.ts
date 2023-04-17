@@ -8,7 +8,7 @@ export const create = () => ({
 		email: null
 	},
 	birthday: null
-});
+})
 export const edit = () => ({
 	user: {
 		id: 1,
@@ -18,4 +18,4 @@ export const edit = () => ({
 		email: 'cunninghammegan@hotmail.com'
 	},
 	birthday: '1921-04-14'
-});
+})

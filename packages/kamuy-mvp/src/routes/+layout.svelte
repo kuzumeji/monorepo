@@ -1,6 +1,6 @@
 <script>
-	import '../mvp.css';
-	import '../mvp-var.css';
+	import '../mvp.css'
+	import '../mvp-var.css'
 </script>
 
 <svelte:head>

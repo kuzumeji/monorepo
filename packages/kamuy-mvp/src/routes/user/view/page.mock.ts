@@ -8,4 +8,4 @@ export const standard = () => ({
 		email: 'cunninghammegan@hotmail.com'
 	},
 	birthday: '1921-04-14'
-});
+})
