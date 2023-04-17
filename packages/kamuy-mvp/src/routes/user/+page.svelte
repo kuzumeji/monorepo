@@ -15,7 +15,8 @@
 		<aside>
 			<a href="/user/view?id={user.id}">
 				<h3>
-					{user.username} {user.name != '' ? '('+user.name+')' : ''}
+					{user.username}
+					{user.name != '' ? '(' + user.name + ')' : ''}
 				</h3>
 				<p>{user.email}</p>
 			</a>

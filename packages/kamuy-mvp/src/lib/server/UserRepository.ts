@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { db } from '$lib/server/prisma';
 
 export class UserRepository {
