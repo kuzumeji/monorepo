@@ -1,9 +1,10 @@
 import { PrismaClient, Prisma } from '@prisma/client';
+import { db } from '$lib/server/prisma';
 
 export class UserRepository {
 	_user;
-	constructor(aClient: PrismaClient) {
-		this._user = aClient.user;
+	constructor() {
+		this._user = db.user;
 	}
 	async create(aUser: Prisma.UserCreateInput) {
 		try {

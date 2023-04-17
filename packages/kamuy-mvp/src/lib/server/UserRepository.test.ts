@@ -1,21 +1,22 @@
 import { beforeAll, afterAll, describe, it, expect } from 'vitest';
-import { Prisma, PrismaClient, type User } from '@prisma/client';
 import { UserRepository } from './UserRepository';
+import { db } from '$lib/server/prisma';
+import type { Prisma, User } from '@prisma/client';
 
-const DB = new PrismaClient();
+// const db = new PrismaClient();
 const USERS: Prisma.Enumerable<Prisma.UserCreateManyInput> = [
 	{ username: 'foo@UserRepository', name: 'foo', email: 'foo@gmail.com' },
 	{ username: 'bar@UserRepository', name: 'bar', email: 'bar@gmail.com' },
 	{ username: 'baz@UserRepository', name: 'baz', email: 'baz@gmail.com' }
 ];
 beforeAll(async () => {
-	await DB.user.deleteMany({ where: { username: { endsWith: '@UserRepository' } } });
+	await db.user.deleteMany({ where: { username: { endsWith: '@UserRepository' } } });
 });
 afterAll(async () => {
-	await DB.user.deleteMany({ where: { username: { endsWith: '@UserRepository' } } });
-	await DB.$disconnect();
+	await db.user.deleteMany({ where: { username: { endsWith: '@UserRepository' } } });
+	await db.$disconnect();
 });
-const testee = new UserRepository(DB);
+const testee = new UserRepository();
 describe('CRUD User', async () => {
 	const users: User[] = [];
 	it('Create User', async () => {
@@ -34,7 +35,7 @@ describe('CRUD User', async () => {
 	it('Update User', async () => {
 		const foo2: Prisma.UserUpdateInput = {
 			email: 'foo2@gmail.com'
-		}
+		};
 		expect((await testee.updateUnique(users[0].id, foo2))?.email).toBe('foo2@gmail.com');
 	});
 	it('Delete User', async () => {

@@ -1,9 +1,10 @@
 import type { PageServerLoad } from './$types';
-import db from '$lib/server/db';
+import { UserRepository } from '$lib/server/UserRepository';
 
 export const load = (async () => {
+	const repo = new UserRepository();
 	return {
-		users: await await db.user.findMany({ orderBy: [{ id: 'asc' }] })
+		users: await repo.findMany()
 	};
 }) satisfies PageServerLoad;
 // export const prerender = true;
