@@ -1,3 +1,5 @@
 {
-	"terminal.integrated.allowChords": false
+	"terminal.integrated.allowChords": false,
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode"
 }
