@@ -1,8 +1,8 @@
 import type { RequestHandler } from './$types'
-import prisma from '$lib/server/prisma'
+import { db } from '$lib/server/prisma'
 
 export const GET: RequestHandler = async () => {
-	const users = await prisma.user.findMany()
+	const users = await db.user.findMany()
 	console.log(users)
 	return new Response(JSON.stringify(users))
 }

@@ -21,8 +21,8 @@ describe('CRUD User', () => {
 	const users: User[] = []
 	it('Create User', () => {
 		expect(() => {
-			USERS.forEach(USER => {
-				testee.create(USER).then(data => {
+			USERS.forEach((USER) => {
+				testee.create(USER).then((data) => {
 					users.push(data)
 				})
 			})
@@ -32,16 +32,16 @@ describe('CRUD User', () => {
 		}).not.toThrowError()
 	})
 	it('Read User', () => {
-		testee.findMany().then(data => {
+		testee.findMany().then((data) => {
 			expect(data.length).greaterThanOrEqual(3)
 		})
-		testee.findUnique(users[0]?.id).then(data => {
+		testee.findUnique(users[0]?.id).then((data) => {
 			expect(data?.name).toBe('foo')
 		})
-		testee.findUnique(users[1]?.id).then(data => {
+		testee.findUnique(users[1]?.id).then((data) => {
 			expect(data?.name).toBe('bar')
 		})
-		testee.findUnique(users[2]?.id).then(data => {
+		testee.findUnique(users[2]?.id).then((data) => {
 			expect(data?.name).toBe('baz')
 		})
 		// expect((await testee.findMany()).length).greaterThanOrEqual(3)
@@ -53,19 +53,19 @@ describe('CRUD User', () => {
 		const foo2: Prisma.UserUpdateInput = {
 			email: 'foo2@gmail.com'
 		}
-		testee.updateUnique(users[0]?.id, foo2).then(data => {
+		testee.updateUnique(users[0]?.id, foo2).then((data) => {
 			expect(data?.email).toBe('foo2@gmail.com')
 		})
 		// expect((await testee.updateUnique(users[0].id, foo2))?.email).toBe('foo2@gmail.com')
 	})
 	it('Delete User', () => {
-		testee.deleteUnique(users[0]?.id).then(data => {
+		testee.deleteUnique(users[0]?.id).then((data) => {
 			expect(data?.name).toBe('foo')
 		})
-		testee.deleteUnique(users[1]?.id).then(data => {
+		testee.deleteUnique(users[1]?.id).then((data) => {
 			expect(data?.name).toBe('bar')
 		})
-		testee.deleteUnique(users[2]?.id).then(data => {
+		testee.deleteUnique(users[2]?.id).then((data) => {
 			expect(data?.name).toBe('baz')
 		})
 		// expect((await testee.deleteUnique(users[0].id))?.name).toBe('foo')
