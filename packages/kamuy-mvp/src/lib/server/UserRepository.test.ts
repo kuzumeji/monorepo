@@ -1,75 +1,73 @@
 import { beforeAll, afterAll, describe, it, expect } from 'vitest'
 import { UserRepository } from './UserRepository'
 import { db } from '$lib/server/prisma'
-import type { Prisma, User } from '@prisma/client'
+import { Prisma } from '@prisma/client'
+import type { User } from '@prisma/client'
 
-// const db = new PrismaClient();
 const USERS: Prisma.Enumerable<Prisma.UserCreateManyInput> = [
 	{ username: 'foo@UserRepository', name: 'foo', email: 'foo@gmail.com' },
 	{ username: 'bar@UserRepository', name: 'bar', email: 'bar@gmail.com' },
 	{ username: 'baz@UserRepository', name: 'baz', email: 'baz@gmail.com' }
 ]
-beforeAll(() => {
-	db.user.deleteMany({ where: { username: { endsWith: '@UserRepository' } } })
+const USERNAMES: string[] = ['foo', 'bar', 'baz']
+beforeAll(async () => {
+	await db.user.deleteMany({ where: { username: { endsWith: '@UserRepository' } } })
 })
-afterAll(() => {
-	db.user.deleteMany({ where: { username: { endsWith: '@UserRepository' } } })
-	// db.$disconnect()
+afterAll(async () => {
+	await db.user.deleteMany({ where: { username: { endsWith: '@UserRepository' } } })
+	// await db.$disconnect()
 })
 const testee = new UserRepository()
 describe('CRUD User', () => {
 	const users: User[] = []
-	it('Create User', () => {
-		expect(() => {
-			USERS.forEach((USER) => {
-				testee.create(USER).then((data) => {
-					users.push(data)
-				})
-			})
-			// users.push(await testee.create(USERS[0]))
-			// users.push(await testee.create(USERS[1]))
-			// users.push(await testee.create(USERS[2]))
-		}).not.toThrowError()
+	it('Create User', async () => {
+		for (const USER of USERS) {
+			const user = await testee.create(USER)
+			console.log(user)
+			users.push(user)
+		}
+		try {
+			const user = await testee.create(USERS[0])
+			expect(user).not.toBe(null)
+		} catch (e) {
+			expect(e).toBeInstanceOf(Prisma.PrismaClientKnownRequestError)
+		}
 	})
-	it('Read User', () => {
+	it('Read User', async () => {
 		testee.findMany().then((data) => {
 			expect(data.length).greaterThanOrEqual(3)
 		})
-		testee.findUnique(users[0]?.id).then((data) => {
-			expect(data?.name).toBe('foo')
-		})
-		testee.findUnique(users[1]?.id).then((data) => {
-			expect(data?.name).toBe('bar')
-		})
-		testee.findUnique(users[2]?.id).then((data) => {
-			expect(data?.name).toBe('baz')
-		})
-		// expect((await testee.findMany()).length).greaterThanOrEqual(3)
-		// expect((await testee.findUnique(users[0].id))?.name).toBe('foo')
-		// expect((await testee.findUnique(users[1].id))?.name).toBe('bar')
-		// expect((await testee.findUnique(users[2].id))?.name).toBe('baz')
+		for (let i = 0; i < 3; i++) {
+			testee.findUnique(users[i]?.id).then((data) => {
+				expect(data?.name).toBe(USERNAMES[i])
+			})
+		}
+		const user = await testee.findUnique(0)
+		expect(user).toBe(null)
 	})
-	it('Update User', () => {
+	it('Update User', async () => {
 		const foo2: Prisma.UserUpdateInput = {
 			email: 'foo2@gmail.com'
 		}
 		testee.updateUnique(users[0]?.id, foo2).then((data) => {
 			expect(data?.email).toBe('foo2@gmail.com')
 		})
-		// expect((await testee.updateUnique(users[0].id, foo2))?.email).toBe('foo2@gmail.com')
+		try {
+			await testee.updateUnique(0, foo2)
+		} catch (e) {
+			expect(e).toBeInstanceOf(Prisma.PrismaClientKnownRequestError)
+		}
 	})
-	it('Delete User', () => {
-		testee.deleteUnique(users[0]?.id).then((data) => {
-			expect(data?.name).toBe('foo')
-		})
-		testee.deleteUnique(users[1]?.id).then((data) => {
-			expect(data?.name).toBe('bar')
-		})
-		testee.deleteUnique(users[2]?.id).then((data) => {
-			expect(data?.name).toBe('baz')
-		})
-		// expect((await testee.deleteUnique(users[0].id))?.name).toBe('foo')
-		// expect((await testee.deleteUnique(users[1].id))?.name).toBe('bar')
-		// expect((await testee.deleteUnique(users[2].id))?.name).toBe('baz')
+	it('Delete User', async () => {
+		for (let i = 0; i < 3; i++) {
+			testee.deleteUnique(users[i]?.id).then((data) => {
+				expect(data?.name).toBe(USERNAMES[i])
+			})
+		}
+		try {
+			await testee.deleteUnique(0)
+		} catch (e) {
+			expect(e).toBeInstanceOf(Prisma.PrismaClientKnownRequestError)
+		}
 	})
 })
