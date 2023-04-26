@@ -4,11 +4,11 @@
 
 [SvelteKit] プロジェクトを作成する
 
-```bash
-pnpm create svelte@latest kamuy-mvp
-cd kamuy-mvp
-pnpm install
-```
+  ```bash
+  pnpm create svelte@latest kamuy-mvp
+  cd kamuy-mvp
+  pnpm install
+  ```
 
 - 選択肢
   - Which Svelte app template?
